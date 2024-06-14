@@ -1,27 +1,33 @@
-My Math Library
-This is a simple math library that provides various mathematical functions. It includes functions for addition, subtraction, multiplication, division, factorial, and square root.
+**Overview**
 
-Installation
+This project demonstrates a basic setup for building a main executable (main) from multiple source files (main.c, src1.c, src2.c, src3.c) using Makefiles.
 
-Clone the Repository:
-git clone https://github.com/your-username/math_lib.git
+**Project Structure**
 
-Navigate to the Project Directory:
-cd math_lib
+main.c: Main program source file.
 
-Compile the Library:
-make
+src1.c, src2.c, src3.c: Additional source files.
 
-Install the Binary and Header File:
-sudo make install
+make1.mk, make2.mk, make3.mk: Makefiles to build src1.o, src2.o, src3.o respectively.
 
-Usage
-
-Include the math_lib.h header file in your C program.
-Link your program with the math_lib library (e.g., by compiling with gcc -o my_program main.c -lmath_lib).
+Makefile: Main Makefile orchestrating the build process.
 
 
-Clean Up
-To remove the installed binary and header file:
+**Building the Project**
 
-sudo make clean-all
+Choose Compilation Method:
+
+Option 1: Using Included Makefiles
+
+    USE_INCLUDE=1 make all
+
+Option 2: Using External Makefiles with make -f
+
+    make all
+
+Clean Build:
+
+To clean up generated object files and executables:
+
+    make clean
+

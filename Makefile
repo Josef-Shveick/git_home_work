@@ -2,29 +2,41 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-# Directories
-SRC_DIR = math_lib/src
-INC_DIR = math_lib/inc
-BIN_DIR = /usr/local/bin
-INCLUDE_DIR = /usr/local/include
+MAIN_SOURCE = main.c
+MAIN_OBJECT = $(MAIN_SOURCE:.c=.o)
+OBJ_FILES = src1.o src2.o src3.o
+EXECUTABLE = main
 
-# Source files
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-MAIN_FILE = main.c
 
-# Targets
-all: my_program
+# Check the environment variable USE_INCLUDE
+ifeq ($(USE_INCLUDE), 1)
+$(info Building sources using include)	
+include make1.mk	
+include make2.mk	
+include make3.mk
+else
+$(info Building sources using 'make -f')	
+$(shell make -f make1.mk)	
+$(shell make -f make2.mk)	
+$(shell make -f make3.mk)
+endif
 
-my_program: $(SRC_FILES) $(MAIN_FILE)
-	$(CC) $(CFLAGS) -I$(INC_DIR) $^ -o $@ -lm
 
-install: my_program
-	cp my_program $(BIN_DIR)
-	cp $(INC_DIR)/math_lib.h $(INCLUDE_DIR)
+# Compile main program
+$(EXECUTABLE): $(MAIN_OBJECT) $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJECT) $(OBJ_FILES)
 
+# Compile main.c to main.o
+$(MAIN_OBJECT): $(MAIN_SOURCE)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+# Clean target to remove object files and executable
 clean:
-	rm -f my_program
+	rm -f $(OBJ_FILES) $(MAIN_OBJECT) $(EXECUTABLE)
 
-clean-all: clean
-	rm -f $(BIN_DIR)/my_program
-	rm -f $(INCLUDE_DIR)/math_lib.hsudo
+# Phony targets
+.PHONY: all clean
+
+# Default target
+all: $(EXECUTABLE)
