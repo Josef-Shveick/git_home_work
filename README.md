@@ -1,27 +1,49 @@
-My Math Library
-This is a simple math library that provides various mathematical functions. It includes functions for addition, subtraction, multiplication, division, factorial, and square root.
+This project includes a calculator program, and two text manipulation programs (upper and lower). The calculator program performs basic mathematical operations, while the upper and lower programs convert text to uppercase and lowercase, respectively. The project builds a static library for the calculator functions and a shared library for the text conversion functions.
 
-Installation
+**Makefile Targets**
 
-Clone the Repository:
-git clone https://github.com/your-username/math_lib.git
+all - Builds the calculator, upper, and lower programs.
 
-Navigate to the Project Directory:
-cd math_lib
+list - Lists the available programs to build.
 
-Compile the Library:
-make
+calculator - Compiles the calculator program and links it with the static library.
 
-Install the Binary and Header File:
-sudo make install
+upper - Compiles the upper program and links it with the shared library.
 
-Usage
+lower - Compiles the lower program and links it with the shared library.
 
-Include the math_lib.h header file in your C program.
-Link your program with the math_lib library (e.g., by compiling with gcc -o my_program main.c -lmath_lib).
+install - Installs the calculator, upper, and lower programs, and their respective header files, into the system directories.
+
+clean - Cleans the object files, static library, shared library, and executable programs.
+
+clean-all - Performs the clean target and additionally removes installed files.
 
 
-Clean Up
-To remove the installed binary and header file:
+**Building the Project**
 
-sudo make clean-all
+To build the project, navigate to the root directory and run:
+
+    make all
+
+Listing Available Programs
+
+    make list
+
+Installing the Programs
+
+    sudo make install
+
+Cleaning the Build
+
+    make clean
+
+To clean all including installed files, run:
+
+    make clean all
+
+
+**Running  programs**
+
+    ./calculator
+    ./upper
+    ./lower
