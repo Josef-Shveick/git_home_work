@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 PORT=80
+# containers in same docker network accessible over http by container's name
 SERVER_HOSTNAME=nc_server
 
 case "$1" in
